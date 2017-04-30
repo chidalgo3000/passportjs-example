@@ -6,11 +6,17 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "bson": "^1.0.4",
     "express": "3.4.4",
     "jade": "*",
-    "mongoose": "~3.8.8",
-    "passport": "~0.2.0",
-    "passport-facebook": "~1.0.2",
-    "passport-twitter": "~1.0.2"
+    "jwt-js": "^0.5.0",
+    "mongoose": "^3.8.40",
+    "passport": "^0.2.2",
+    "passport-azure-ad-oauth2": "0.0.4",
+    "passport-azure-oauth": "0.0.6",
+    "passport-facebook": "^1.0.3",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth2": "^0.1.6",
+    "passport-twitter": "^1.0.4"
   }
 }

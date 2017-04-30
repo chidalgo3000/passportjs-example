@@ -66,18 +66,41 @@ app.get('/logout', function(req, res) {
 });
 // Ruta para autenticarse con Twitter (enlace de login)
 app.get('/auth/twitter', passport.authenticate('twitter'));
+
 // Ruta para autenticarse con Facebook (enlace de login)
 app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// Ruta para autenticarse con Google (enlace de login)
+app.get('/auth/google', passport.authenticate('google', { scope:
+  	[ 'https://www.googleapis.com/auth/plus.login',
+  	  'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
+));
+
+app.get('/auth/azureadoauth2', passport.authenticate('azure_ad_oauth2'));
+
+
 // Ruta de callback, a la que redirigirá tras autenticarse con Twitter.
 // En caso de fallo redirige a otra vista '/login'
 app.get('/auth/twitter/callback', passport.authenticate('twitter',
   { successRedirect: '/', failureRedirect: '/login' }
 ));
+
 // Ruta de callback, a la que redirigirá tras autenticarse con Facebook.
 // En caso de fallo redirige a otra vista '/login'
 app.get('/auth/facebook/callback', passport.authenticate('facebook',
   { successRedirect: '/', failureRedirect: '/login' }
 ));
+
+app.get('/auth/google/callback', passport.authenticate('google',
+    {successRedirect: '/', failureRedirect: '/login'}
+));
+
+app.get('/auth/azureadoauth2/callback',
+  passport.authenticate('azure_ad_oauth2', { failureRedirect: '/login' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // Inicio del servidor
 app.listen(app.get('port'), function(){
